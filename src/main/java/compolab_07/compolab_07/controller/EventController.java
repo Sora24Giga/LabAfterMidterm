@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import compolab_07.compolab_07.entity.Event;
 import compolab_07.compolab_07.service.EventService;
+import compolab_07.compolab_07.util.LabMapper;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -29,7 +30,8 @@ public class EventController {
 
                 HttpHeaders responseHeader = new HttpHeaders();
                 responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
-                return new ResponseEntity<>(pageOutput.getContent(), responseHeader, HttpStatus.OK);
+                return new ResponseEntity<>(LabMapper.INSTANCE.getEventDto(pageOutput.getContent()), responseHeader,
+                                HttpStatus.OK);
 
         }
 
@@ -37,7 +39,7 @@ public class EventController {
         public ResponseEntity<?> getEvent(@PathVariable("id") Long id) {
                 Event output = eventService.getEvent(id);
                 if (output != null) {
-                        return ResponseEntity.ok(output);
+                        return ResponseEntity.ok(LabMapper.INSTANCE.getEventDto(output));
                 } else {
                         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The givenid is not found");
 
@@ -47,7 +49,7 @@ public class EventController {
         @PostMapping("/events")
         public ResponseEntity<?> addEvent(@RequestBody Event event) {
                 Event output = eventService.save(event);
-                return ResponseEntity.ok(output);
+                return ResponseEntity.ok(LabMapper.INSTANCE.getEventDto(output));
         }
 
 }

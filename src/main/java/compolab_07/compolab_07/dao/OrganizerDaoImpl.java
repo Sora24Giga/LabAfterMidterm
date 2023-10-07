@@ -1,55 +1,28 @@
 // package compolab_07.compolab_07.dao;
 
-// import java.util.ArrayList;
-// import java.util.List;
+// import java.util.Optional;
 
+// import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.Pageable;
 // import org.springframework.stereotype.Repository;
 
 // import compolab_07.compolab_07.entity.Organizer;
-// import jakarta.annotation.PostConstruct;
+// import compolab_07.compolab_07.repository.OrganizerRepository;
+// import lombok.RequiredArgsConstructor;
 
 // @Repository
+// @RequiredArgsConstructor
 // public class OrganizerDaoImpl implements OrganizerDao {
-//     List<Organizer> eventList;
+//     final OrganizerRepository organizerRepository;
 
-//     @PostConstruct
-//     public void init() {
-//         eventList = new ArrayList<>();
-
-//         eventList.add(Organizer.builder()
-//                 .id(1003L)
-//                 .organizerName("Dog")
-//                 .address("home")
-//                 .build());
-
-//         eventList.add(Organizer.builder()
-//                 .id(1004L)
-//                 .organizerName("Cat")
-//                 .address("home")
-//                 .build());
-
-//         eventList.add(Organizer.builder()
-//                 .id(1005L)
-//                 .organizerName("MOOO")
-//                 .address("home")
-//                 .build());
+//     @Override
+//     public Page<Organizer> getOrganizer(Pageable pageRequest) {
+//         return organizerRepository.findAll(pageRequest);
 //     }
 
 //     @Override
-//     public Integer getEventSize() {
-//         return eventList.size();
+//     public Optional<Organizer> findById(Long id) {
+//         return organizerRepository.findById(id);
 //     }
 
-//     @Override
-//     public List<Organizer> getEvents(Integer pageSize, Integer page) {
-//         pageSize = pageSize == null ? eventList.size() : pageSize;
-//         page = page == null ? 1 : page;
-//         int firstIndex = (page - 1) * pageSize;
-//         return eventList.subList(firstIndex, firstIndex + pageSize);
-//     }
-
-//     @Override
-//     public Organizer getEvent(Long id) {
-//         return eventList.stream().filter(event -> event.getId().equals(id)).findFirst().orElse(null);
-//     }
 // }

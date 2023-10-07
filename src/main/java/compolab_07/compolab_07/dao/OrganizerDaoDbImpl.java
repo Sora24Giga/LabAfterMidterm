@@ -13,27 +13,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Profile("db")
 public class OrganizerDaoDbImpl implements OrganizerDao {
-    final OrganizerRepository OrganizerRepository;
+    final OrganizerRepository organizerRepository;
 
     @Override
-    public Integer getEventSize() {
-        return Math.toIntExact(OrganizerRepository.count());
+    public Integer getOrganizerSize() {
+        return Math.toIntExact(organizerRepository.count());
     }
 
     @Override
-    public Page<Organizer> getEvents(Integer pageSize, Integer page) {
-        return OrganizerRepository.findAll(PageRequest.of(page - 1, pageSize));
-
+    public Page<Organizer> getOrganizers(Integer pageSize, Integer page) {
+        if (pageSize != null && page != null) {
+            return organizerRepository.findAll(PageRequest.of(page - 1, pageSize));
+        }
+        return organizerRepository.findAll(PageRequest.of(0, getOrganizerSize()));
     }
 
     @Override
-    public Organizer getEvent(Long id) {
-        return OrganizerRepository.findById(id).orElse(null);
+    public Organizer getOrganizer(Long id) {
+        return organizerRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Organizer save(Organizer event) {
-        return OrganizerRepository.save(event);
+    public Organizer save(Organizer Organizer) {
+        return organizerRepository.save(Organizer);
     }
 
 }

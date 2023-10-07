@@ -4,13 +4,13 @@ import org.springframework.data.domain.Page;
 
 import compolab_07.compolab_07.entity.Organizer;
 
+
 public interface OrganizerService {
-    Integer getEventSize();
+    Integer getOrganizerSize();
 
-    Page<Organizer> getEvents(Integer pageSize, Integer page);
+    Page<Organizer> getOrganizers(Integer pageSize, Integer page);
 
-    Organizer getEvent(Long id);
+    Organizer getOrganizer(Long id);
 
-    Organizer save(Organizer event);
-
+    Organizer save(Organizer organizer);
 }
