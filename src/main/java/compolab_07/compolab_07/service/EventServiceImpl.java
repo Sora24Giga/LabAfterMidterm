@@ -1,6 +1,7 @@
 package compolab_07.compolab_07.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import compolab_07.compolab_07.dao.EventDao;
@@ -40,6 +41,11 @@ public class EventServiceImpl implements EventService {
         organizer.getOwnEvents().add(event);
 
         return eventDao.save(event);
+    }
+
+    @Override
+    public Page<Event> getEvents(String title, Pageable pageable) {
+        return eventDao.getEvents(title,pageable);
     }
 
 }

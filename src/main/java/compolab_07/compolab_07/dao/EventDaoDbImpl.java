@@ -3,6 +3,7 @@ package compolab_07.compolab_07.dao;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import compolab_07.compolab_07.entity.Event;
@@ -34,6 +35,12 @@ public class EventDaoDbImpl implements EventDao {
     @Override
     public Event save(Event event) {
         return eventRepository.save(event);
+    }
+
+    @Override
+    public Page<Event> getEvents(String title, Pageable page) {
+        return eventRepository.findByTitleContainingOrDescriptionContainingOrOrganizer_NameContaining(title, title,
+                title, page);
     }
 
 }
